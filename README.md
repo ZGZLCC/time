@@ -32,7 +32,7 @@ Time 是使用 Vue 3、Tauri 2、Rust 和 SQLite 的本地时间记录桌面应�
 - `node scripts/verify-sync-live.mjs`：用真实 Worker 与同步码跑一遍推送、拉回与幂等性（需设置 `TIME_SYNC_CODE`）。
 - `npm run tauri -- dev`：启动桌面开发窗口。
 - Windows：`npm run tauri -- build` 生成 NSIS 安装包，位置为 `src-tauri/target/release/bundle/nsis/`。
-- macOS：产物由仓库内的 `.github/workflows/macos-build.yml` 在 GitHub Actions 的 `macos-15`（Apple Silicon）上构建，从运行页下载 `Time-macos-arm64` 压缩包，解压即为免安装的 `Time.app`；本机有 Mac 与 Xcode Command Line Tools 时也可执行 `npm ci`、`npm run tauri -- build` 直接构建（`sh scripts/build-macos-package.sh` 生成 `.pkg` 属可选路线）。
+- macOS：产物由仓库内的 `.github/workflows/macos-build.yml` 在 GitHub Actions 的 `macos-15`（Apple Silicon）上构建，从运行页下载 `Time-macos-arm64-dmg`（内含 `.dmg`，双击后把 Time 拖进「应用程序」）或 `Time-macos-arm64`（内含 `.app` 压缩包）；本机有 Mac 与 Xcode Command Line Tools 时也可执行 `npm ci`、`npm run tauri -- build` 直接构建（`sh scripts/build-macos-package.sh` 生成 `.pkg` 属可选路线）。
 
 Windows NSIS 安装器支持当前用户和全用户范围；检测到已安装时自动沿用原安装范围与目录，不再询问维护选项，直接进入安装位置页（默认已填原目录）覆盖升级，也可以在该页改用新目录另装一份。两处都有旧安装时按所选范围安装。启动安装器需要管理员权限，安装包未做代码签名，SmartScreen 首次运行会提示无法识别的应用，选择“更多信息 → 仍要运行”即可。macOS 的免安装包同样未做代码签名，首次打开需要在「系统设置 → 隐私与安全性」里允许一次；应用声明最低支持 macOS 11.0，图标按应用内同一套 SVG 源以 1024 抗锯齿渲染生成。macOS 的启动、记录持久化、图片与备份导出仍需在 Apple Silicon Mac 上完成实测，测试步骤见 [macOS 验证清单](docs/macos-验证清单.md)。
 
