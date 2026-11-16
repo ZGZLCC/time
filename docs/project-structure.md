@@ -147,7 +147,7 @@ Time/
 | `tsconfig.json` | 严格检查 `src/` 中的 TypeScript 和 Vue 文件。 |
 | `vite.config.ts` | 配置 Vue 插件、开发服务器及 Rust 构建目录监视排除项。 |
 | `.dsh/skills/ponytail/SKILL.md` | 项目级本地技能 `ponytail`：约束编码任务优先取最省实现（YAGNI、标准库、原生能力），支持 `lite`／`full`（默认）／`ultra` 三档强度；只约束实现方式，不改变业务行为。 |
-| `.github/workflows/macos-build.yml` | 在 GitHub Actions 的 `macos-14`（Apple Silicon）上构建 `aarch64-apple-darwin` 产物：Node 22、Rust 稳定版加缓存、`tauri build --bundles app`，用 `ditto` 把 `Time.app` 压成 zip 上传；`.dmg` 单独尝试，失败不阻塞。只在 `main` 推送（跳过纯文档改动）或手动触发时运行。 |
+| `.github/workflows/macos-build.yml` | 在 GitHub Actions 的 `macos-15`（Apple Silicon）上构建 `aarch64-apple-darwin` 产物：Node 22、Rust 稳定版加缓存、`tauri build --bundles app`，用 `ditto` 把 `Time.app` 压成 zip 上传；`.dmg` 单独尝试，失败不阻塞。只在 `main` 推送（跳过纯文档改动）或手动触发时运行。 |
 | `scripts/time.test.mjs` | 检查北京时间转换、日期边界、整分钟时长显示、周标题与完整日期标题格式、闰日与跨年周跳转。 |
 | `scripts/day-range.test.mjs` | 检查北京时间单日区间、跨 UTC 日界的日期归属、跨午夜记录是否计入某一天，以及空日期时不过滤记录。 |
 | `scripts/record-list.test.mjs` | 用 Vite SSR 渲染记录历史组件，检查默认列出全部记录、标题含北京时间日期，以及跳转日期控件已替换月份时间条。 |
@@ -264,7 +264,7 @@ Time/
 
 - `node_modules/`、`dist/` 与 `src-tauri/target/` 是依赖或构建产物，由 `.gitignore` 排除。Windows 发布程序位于 `src-tauri/target/release/time.exe`，NSIS 安装包位于 `src-tauri/target/release/bundle/nsis/Time_1.3.3_x64-setup.exe`。
 - Windows 安装器按 `tauri.conf.json` 的 `installMode: "both"` 支持当前用户与全用户范围，并在检查到已有安装时跳过维护选项页、默认沿用原范围与目录覆盖升级。
-- macOS 产物由 `.github/workflows/macos-build.yml` 在 GitHub Actions 的 `macos-14`（Apple Silicon）上构建：免安装的 `Time.app` 压缩包为必交付产物，`.dmg` 尽力生成；应用声明最低支持 macOS 11.0，使用临时签名，首次打开需在系统设置里允许一次。`scripts/build-macos-package.sh` 仍保留基于 Apple `productbuild` 的 `.pkg` 原位置升级路线，属于可选方式。原生包的启动、记录持久化、图片与备份导出仍需在 Apple Silicon Mac 上完成实机验证。
+- macOS 产物由 `.github/workflows/macos-build.yml` 在 GitHub Actions 的 `macos-15`（Apple Silicon）上构建：免安装的 `Time.app` 压缩包为必交付产物，`.dmg` 尽力生成；应用声明最低支持 macOS 11.0，使用临时签名，首次打开需在系统设置里允许一次。`scripts/build-macos-package.sh` 仍保留基于 Apple `productbuild` 的 `.pkg` 原位置升级路线，属于可选方式。原生包的启动、记录持久化、图片与备份导出仍需在 Apple Silicon Mac 上完成实机验证。
 - 已完成记录使用 UTC Unix 毫秒存储，表单和界面按北京时间显示；待补全记录可保留未填写具体时间的日期，打卡记录只保存开始时间；内容为空的已完成记录按完整记录处理。
 - 记录编号除本地整数主键外还有跨端稳定的 `public_id`，同步按 `updated_at` 做后写胜出、用 `deleted_at` 墓碑传递删除；墓碑超过保留期后由本地与云端分别真正删除。
 - 当前界面支持四类标签按钮、手动记录、快速打卡、草稿、历史编辑删除与按日期跳转、按周浏览和定位详情、选中日期／本周／累计分类时长统计、周时间表 PNG 导出、数据库备份与位置迁移、从备份恢复与清空记录、三态主题，以及云端同步。

@@ -15,7 +15,9 @@ on:
 
 jobs:
   build:
-    runs-on: macos-14
+    # 标准 macOS runner 现已全部是 arm64，且只对公开仓库或付费计划的私有仓库开放；
+    # 本仓库为公开仓库，故使用 macos-15（arm64）构建原生 arm64 产物。
+    runs-on: macos-15
     timeout-minutes: 45
     steps:
       - name: 检出代码
