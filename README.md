@@ -84,8 +84,8 @@ Vue 前端负责界面与交互，Rust 后端作为时间规则、重叠校验�
 网页版与桌面版共用同一套记录契约与同步服务，记录保存在浏览器 IndexedDB，未配置云端时完全本地运行。它随相册站点仓库 `Momo` 的 `web/` 目录维护，发布在 <https://zgzlcc.github.io/time>。国内直连 `*.workers.dev` 会被 DNS 污染，不挂代理时同步不可用，但不影响本地记录。
 
 <p align="center">
-  <img src="docs/images/web-records.png" width="345" alt="网页版记录页">
-  <img src="docs/images/web-settings.png" width="345" alt="网页版设置页：云端同步、备份与恢复、本地数据与主题">
+  <img src="docs/images/web-records.png" width="419" height="330" alt="网页版记录页">
+  <img src="docs/images/web-settings.png" width="426" height="330" alt="网页版设置页：云端同步、备份与恢复、本地数据与主题">
 </p>
 
 ## 许可证
