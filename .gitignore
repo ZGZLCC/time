@@ -2,3 +2,10 @@ node_modules/
 dist/
 src-tauri/target/
 src-tauri/gen/schemas/
+
+# 本地数据与凭据：仓库已公开，避免误把个人记录或环境文件提交上去
+*.sqlite3
+*.sqlite3.bak
+*.db
+.env
+.env.*
