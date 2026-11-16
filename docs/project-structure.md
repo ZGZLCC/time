@@ -45,8 +45,10 @@ Time/
 │  ├─ DESIGN-webflow.md
 │  ├─ images/
 │  │  ├─ records.png
-│  │  ├─ week-grid.png
-│  │  └─ week-stats.png
+│  │  ├─ web-records.png
+│  │  ├─ web-settings.png
+│  │  ├─ week-stats.png
+│  │  └─ week-timeline.png
 │  ├─ implementation-plan.md
 │  ├─ macos-验证清单.md
 │  └─ project-structure.md
@@ -171,7 +173,8 @@ Time/
 | `scripts/build-macos-package.sh` | 在 macOS 用已构建的 `Time.app` 制作按 bundle ID 原位置升级的 `.pkg`，并移开构建副本避免安装器误识别。 |
 | `docs/AGENTS.md` | 项目开发、验证、可访问性和文档维护规范。 |
 | `docs/DESIGN-webflow.md` | 前端视觉规范，包括配色、字体、间距、圆角、组件和响应式规则。 |
-| `docs/images/records.png`、`week-stats.png`、`week-grid.png` | README 界面章节的三张截图：记录页、周视图分类时长、周视图七日时间轴（暗色主题）。 |
+| `docs/images/records.png`、`week-stats.png`、`week-timeline.png` | README 界面章节的三张桌面版截图（暗色）：记录页、周视图分类时长、累计时长与七日时间轴。 |
+| `docs/images/web-records.png`、`web-settings.png` | README 网页版章节的两张截图（亮色）：网页版记录页与设置页。 |
 | `docs/implementation-plan.md` | 产品技术方案、数据约束、流程及分阶段验收标准。 |
 | `docs/macos-验证清单.md` | 给测试者的 macOS 操作单：两种系统版本的打开方式（含未签名应用的一次性授权）、14 项验收清单、数据位置、反馈格式与已知限制。 |
 | `docs/project-structure.md` | 当前目录与职责说明；项目代码或文档变化时同步维护。 |
