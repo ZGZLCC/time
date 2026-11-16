@@ -1,0 +1,70 @@
+name: macOS 构建
+
+# 在 GitHub 的 Apple Silicon runner 上构建免安装的 Time.app。
+# 正式分发如需「双击即开」，在仓库 Secrets 里配置 Apple Developer ID 后，
+# 由 Tauri 自动读取 APPLE_CERTIFICATE / APPLE_SIGNING_IDENTITY / APPLE_ID /
+# APPLE_PASSWORD / APPLE_TEAM_ID 完成签名与公证；当前默认使用临时签名。
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "docs/**"
+      - "README.md"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-14
+    timeout-minutes: 45
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 安装 Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: 安装 Rust 与 arm64 目标
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-apple-darwin
+
+      - name: 缓存 Rust 依赖
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
+
+      - name: 安装前端依赖
+        run: npm ci
+
+      - name: 构建应用（.app）
+        run: npm run tauri -- build --target aarch64-apple-darwin --bundles app
+
+      - name: 打包 .app 为 zip
+        run: |
+          cd src-tauri/target/aarch64-apple-darwin/release/bundle/macos
+          ditto -c -k --keepParent Time.app Time-macos-arm64.zip
+          ls -lh Time-macos-arm64.zip
+
+      - name: 上传 .app 压缩包
+        uses: actions/upload-artifact@v4
+        with:
+          name: Time-macos-arm64
+          path: src-tauri/target/aarch64-apple-darwin/release/bundle/macos/Time-macos-arm64.zip
+          if-no-files-found: error
+
+      # dmg 打包在无头 runner 上偶尔卡在设置窗口样式那一步，失败不影响 zip 交付
+      - name: 尝试生成 .dmg
+        continue-on-error: true
+        run: npm run tauri -- build --target aarch64-apple-darwin --bundles dmg
+
+      - name: 上传 .dmg
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: Time-macos-arm64-dmg
+          path: src-tauri/target/aarch64-apple-darwin/release/bundle/dmg/*.dmg
+          if-no-files-found: warn

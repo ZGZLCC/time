@@ -1,0 +1,132 @@
+.settings-page {
+  display: grid;
+  gap: 16px;
+}
+
+.settings-heading h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.settings-card h3 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.settings-card > p:not(.folder-message) {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.theme-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.theme-option {
+  border-color: var(--field-border);
+  color: var(--ink);
+  background: var(--panel);
+}
+
+.theme-option:hover {
+  background: var(--hover);
+}
+
+.theme-option.selected {
+  border-color: var(--ink);
+  background: var(--surface);
+  font-weight: 600;
+}
+
+/*
+ * 与网页版一致的操作按钮行：一行内等宽铺满。
+ * 按钮变体自带不同内边距，会让较宽的那个撑开，所以统一水平内边距。
+ * 不写 nowrap / text-overflow：宁可让文字换行，也不要把字挤掉或用省略号截断。
+ */
+.backup-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.backup-actions .button {
+  flex: 1 1 0;
+  min-width: 0;
+  padding-inline: 10px;
+  overflow: hidden;
+}
+
+.field-stack {
+  display: grid;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.field-stack .field input {
+  width: 100%;
+}
+
+/*
+ * 确认弹窗与网页版同一套：项目自己的样式、居中显示，
+ * 不用系统默认的 confirm 对话框。
+ */
+.delete-dialog {
+  width: min(400px, calc(100% - 32px));
+  margin: auto;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  background: var(--panel);
+}
+
+.delete-dialog::backdrop {
+  background: rgb(8 8 8 / 30%);
+}
+
+.delete-dialog h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.delete-dialog p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.delete-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+@media (max-width: 560px) {
+  .settings-card .folder-controls {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .settings-card .folder-controls input {
+    grid-column: 1 / -1;
+  }
+
+  /* 窄屏一行放不下四个按钮，改成每行两个、仍等宽铺满 */
+  .backup-actions {
+    flex-wrap: wrap;
+  }
+
+  .backup-actions .button {
+    flex: 1 1 calc(50% - 4px);
+    padding-inline: 8px;
+  }
+}
