@@ -238,7 +238,7 @@ async function applyRestore() {
   try {
     const restored = await restoreDatabase(path);
     backupFailed.value = false;
-    backupStatus.value = `已从 ${fileName(path)} 恢复 ${restored} 条记录。原数据库已留 .bak 快照。`;
+    backupStatus.value = `已从 ${fileName(path)} 恢复 ${restored} 条记录。`;
     cancelRestore();
     await refreshOverview();
     emitLocalDataChanged();
@@ -318,7 +318,7 @@ function chooseTheme(value: Theme) {
 
     <section class="panel settings-card" aria-labelledby="backup-title">
       <h3 id="backup-title">备份与恢复</h3>
-      <p>导出会把全部记录保存成一个 SQLite 备份文件（同名文件不会被覆盖）；恢复会用备份内容整体替换当前记录，恢复前会自动留下 .bak 快照。换机器或重装系统前建议先导出一次。</p>
+      <p>导出会把全部记录保存成一个 SQLite 备份文件（同名文件不会被覆盖）；恢复会用备份内容整体替换当前记录，替换后无法撤销，建议先导出一份。换机器或重装系统前同样建议先导出。</p>
       <div class="backup-actions">
         <button class="button button-secondary" type="button" :disabled="!!busy || !backupFolder.trim()" @click="saveBackup">{{ busy === "backup" ? "正在导出…" : "导出备份" }}</button>
         <button class="button button-secondary" type="button" :disabled="!!busy" @click="chooseRestoreFile">{{ busy === "restore" ? "正在恢复…" : "从文件恢复" }}</button>

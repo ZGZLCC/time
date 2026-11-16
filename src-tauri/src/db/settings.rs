@@ -174,7 +174,8 @@ fn save_location(data_dir: &Path, path: &Path) -> Result<(), AppError> {
 /// 直接导进来等于把记录变成"从未同步过"的状态，还会丢掉删除墓碑，
 /// 让别的设备把已删记录推回来。宁可明确报错，也不做这种有损恢复。
 ///
-/// 当前库在改动前由 migrate 自动留下 `.vN.bak` 快照，回滚有据可依。
+/// 当前库只在 schema 升级时由 migrate 留下 `.vN.bak` 快照；恢复这一步本身不额外备份，
+/// 调用方应提醒用户先自行导出备份。
 pub(super) fn restore_database(
     destination: &mut Connection,
     source_path: &Path,
