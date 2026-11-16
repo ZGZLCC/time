@@ -16,6 +16,15 @@
 
 桌面端与网页版共用同一个同步服务与同一套记录契约：一个同步码对应一份独立数据，换设备填入同一个码即可拉回全部记录。
 
+## 界面
+
+<p align="center"><img src="docs/images/records.png" width="700" alt="记录页：快速打卡、待补全与手动记录"></p>
+
+<p align="center">
+  <img src="docs/images/week-stats.png" width="345" alt="周视图：选中日期、本周与累计的四类时长">
+  <img src="docs/images/week-grid.png" width="345" alt="周视图：按起止分钟定位的七天时间网格">
+</p>
+
 ## 功能
 
 - **记录**：手动填写起止日期与时间、快速打卡（只记开始时间）、草稿补全、编辑与删除；已完成记录之间禁止时间重叠，冲突时保留输入并提示对应记录
