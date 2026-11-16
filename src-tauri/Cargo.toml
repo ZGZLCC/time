@@ -3,6 +3,7 @@ name = "time"
 version = "1.3.3"
 description = "时间记录桌面应用"
 authors = ["you"]
+license = "MIT"
 edition = "2021"
 
 [lib]

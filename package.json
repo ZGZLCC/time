@@ -1,6 +1,7 @@
 {
   "name": "time",
   "private": true,
+  "license": "MIT",
   "version": "1.3.3",
   "type": "module",
   "scripts": {
