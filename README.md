@@ -4,7 +4,7 @@
 
 本地优先的时间记录应用：把每天的时间按「工作 / 娱乐 / 睡觉 / 其他」四类记下来，按周回看时间花在哪。
 
-桌面端基于 Tauri 2、Vue 3 与 Rust，记录保存在本机 SQLite 数据库；可选填入同步码，与网页版共用同一份云端数据。界面与统计统一按北京时间，存储使用 UTC 毫秒，跨月、跨年浏览都按同一套区间规则计算。
+桌面端基于 Tauri 2、Vue 3 与 Rust，提供 Windows 安装包与 macOS 应用包两个桌面版本，记录保存在本机 SQLite 数据库；可选填入同步码，与网页版共用同一份云端数据。界面与统计统一按北京时间，存储使用 UTC 毫秒，跨月、跨年浏览都按同一套区间规则计算。
 
 ## 下载与使用
 
@@ -39,7 +39,7 @@
 ## 数据与隐私
 
 - 记录默认在应用数据目录：Windows 为 `%APPDATA%\com.time.tracker\time-v3.sqlite3`，macOS 为 `~/Library/Application Support/com.time.tracker/time-v3.sqlite3`
-- 未填写同步码时不向任何服务器发送数据，应用不含统计、埋点或自动更新检查
+- 未填写同步码时不向任何服务器发送数据，应用不含统计与埋点，也不会自动检查更新
 - 时间以 UTC 毫秒存储，界面与统计按北京时间（UTC+8）展示，系统时区变化不影响历史记录
 - 数据库升级（schema 变化）前按版本留下 `.v{N}.bak` 快照，迁移失败整体回滚，不以删库重建处理异常
 - 备份导出默认落在系统下载文件夹，重名时自动加序号、不覆盖已有文件
@@ -53,12 +53,10 @@ npm ci                 # 安装锁定版本的前端依赖
 npm run tauri -- dev   # 启动桌面开发窗口
 ```
 
-构建与检查：
+构建：
 
 ```bash
 npm run build        # TypeScript 类型检查 + 前端生产构建
-npm run test:time    # 17 项 Node 检查：北京时间、单日区间、记录历史、日历计算
-cargo test --manifest-path src-tauri/Cargo.toml --locked   # 50 项 Rust 检查
 ```
 
 打包：
@@ -73,11 +71,10 @@ Vue 前端负责界面与交互，Rust 后端作为时间规则、重叠校验�
 
 ## 文档
 
-- [执行方案](docs/implementation-plan.md)：数据规则、本地命令接口与分阶段验收标准
+- [执行方案](docs/implementation-plan.md)：数据规则、本地命令接口与阶段划分
 - [项目结构](docs/project-structure.md)：目录清单与每个文件的职责
 - [前端设计规范](docs/DESIGN-webflow.md)：配色、字体、间距与组件规则
-- [开发规范](docs/AGENTS.md)：模块边界、代码长度与验证要求
-- [macOS 验证清单](docs/macos-验证清单.md)：在 Mac 上逐项验收的操作单
+- [开发规范](docs/AGENTS.md)：模块边界、代码长度与提交约定
 
 ## 网页版
 
