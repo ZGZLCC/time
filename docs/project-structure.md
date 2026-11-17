@@ -8,7 +8,6 @@
 
 ```text
 Time/
-├─ AGENTS.md
 ├─ README.md
 ├─ LICENSE
 ├─ .gitignore
@@ -41,7 +40,6 @@ Time/
 │  ├─ verify-tombstone-prune.mjs
 │  └─ verify-upgrade.mjs
 ├─ docs/
-│  ├─ AGENTS.md
 │  ├─ DESIGN-webflow.md
 │  ├─ images/
 │  │  ├─ records.png
@@ -49,8 +47,6 @@ Time/
 │  │  ├─ web-settings.png
 │  │  ├─ week-stats.png
 │  │  └─ week-timeline.png
-│  ├─ implementation-plan.md
-│  ├─ macos-验证清单.md
 │  └─ project-structure.md
 ├─ src/
 │  ├─ App.vue
@@ -146,7 +142,6 @@ Time/
 
 | 路径 | 当前职责 |
 | --- | --- |
-| `AGENTS.md` | 项目规范入口，指向 `docs/AGENTS.md`、执行方案和 README 维护要求。 |
 | `README.md` | 项目介绍：三平台使用方式与下载入口、功能清单、数据与隐私说明、本地部署命令、文档索引与许可证。 |
 | `LICENSE` | MIT 许可证全文，`package.json` 与 `Cargo.toml` 同步声明 `MIT`。 |
 | `.github/workflows/release.yml` | 推送 `v*` 标签时发布：macOS job（`macos-15`）构建 `.app` 与 `.dmg`，Windows job（`windows-latest`）构建 NSIS 安装包，两个产物附到同一个 Release；job 串行执行以避免同时创建 Release。 |
@@ -171,12 +166,9 @@ Time/
 | `scripts/proxy-fetch.mjs` | 代理感知的 HTTPS 请求工具（环境变量与 Windows 系统代理），供验证脚本复用。 |
 | `scripts/patch-nsis-installer.mjs` | 给 `src-tauri/windows/installer.nsi` 的 `PageReinstall` 加上“已有安装则跳过维护选项页”的判定，可重复执行，模板缺少锚点时明确报错。 |
 | `scripts/build-macos-package.sh` | 在 macOS 用已构建的 `Time.app` 制作按 bundle ID 原位置升级的 `.pkg`，并移开构建副本避免安装器误识别。 |
-| `docs/AGENTS.md` | 项目开发、验证、可访问性和文档维护规范。 |
 | `docs/DESIGN-webflow.md` | 前端视觉规范，包括配色、字体、间距、圆角、组件和响应式规则。 |
 | `docs/images/records.png`、`week-stats.png`、`week-timeline.png` | README 界面章节的三张桌面版截图（暗色）：记录页、周视图分类时长、累计时长与七日时间轴。 |
 | `docs/images/web-records.png`、`web-settings.png` | README 网页版章节的两张截图（亮色）：网页版记录页与设置页。 |
-| `docs/implementation-plan.md` | 产品技术方案、数据约束、流程及分阶段验收标准。 |
-| `docs/macos-验证清单.md` | macOS 回归核对单：两种系统版本的打开方式（含未签名应用的一次性授权）、14 项核对表、数据位置、反馈格式与已知限制。 |
 | `docs/project-structure.md` | 当前目录与职责说明；项目代码或文档变化时同步维护。 |
 
 ### `src/` 前端

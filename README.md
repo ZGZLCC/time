@@ -71,10 +71,8 @@ Vue 前端负责界面与交互，Rust 后端作为时间规则、重叠校验�
 
 ## 文档
 
-- [执行方案](docs/implementation-plan.md)：数据规则、本地命令接口与阶段划分
 - [项目结构](docs/project-structure.md)：目录清单与每个文件的职责
 - [前端设计规范](docs/DESIGN-webflow.md)：配色、字体、间距与组件规则
-- [开发规范](docs/AGENTS.md)：模块边界、代码长度与提交约定
 
 ## 网页版
 
