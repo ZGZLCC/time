@@ -12,10 +12,6 @@ Time/
 ├─ LICENSE
 ├─ .gitignore
 ├─ .gitattributes
-├─ .dsh/
-│  └─ skills/
-│     └─ ponytail/
-│        └─ SKILL.md
 ├─ .github/
 │  └─ workflows/
 │     ├─ macos-build.yml
@@ -151,7 +147,6 @@ Time/
 | `.gitattributes` | 统一以 LF 提交与检出，避免 shell 脚本在 macOS 上因 CRLF 无法执行；图片与数据库文件按二进制处理。 |
 | `tsconfig.json` | 严格检查 `src/` 中的 TypeScript 和 Vue 文件。 |
 | `vite.config.ts` | 配置 Vue 插件、开发服务器及 Rust 构建目录监视排除项。 |
-| `.dsh/skills/ponytail/SKILL.md` | 项目级本地技能 `ponytail`：约束编码任务优先取最省实现（YAGNI、标准库、原生能力），支持 `lite`／`full`（默认）／`ultra` 三档强度；只约束实现方式，不改变业务行为。 |
 | `.github/workflows/macos-build.yml` | 在 GitHub Actions 的 `macos-15`（Apple Silicon）上构建 `aarch64-apple-darwin` 产物：Node 22、Rust 稳定版加缓存、`tauri build --bundles app`，用 `ditto` 把 `Time.app` 压成 zip 上传；`.dmg` 单独尝试，失败不阻塞。只在 `main` 推送（跳过纯文档改动）或手动触发时运行。 |
 | `scripts/time.test.mjs` | 检查北京时间转换、日期边界、整分钟时长显示、周标题与完整日期标题格式、闰日与跨年周跳转。 |
 | `scripts/day-range.test.mjs` | 检查北京时间单日区间、跨 UTC 日界的日期归属、跨午夜记录是否计入某一天，以及空日期时不过滤记录。 |
